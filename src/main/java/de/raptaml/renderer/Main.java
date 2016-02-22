@@ -24,14 +24,19 @@ public class Main {
                 
         BufferedImage img = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_RGB);
         Graphics g = img.createGraphics();
-        
+        //origin bottom left for LLO
+        g.translate(0, height);
         //draw line between 0/0 and 10/10
         
        long start = System.nanoTime();
-        xline(0,0,width,height,g,Color.red);
+       //for(long i = 1l; i < 1000000l; i++)
+            xline(0,0,30,50,g,Color.red);
+            xline(30,50,60,20,g,Color.blue);
+            xline(60,20,0,0,g,Color.yellow);
        long end = System.nanoTime();
        
         System.out.println("spent "+ (double)(end-start)/1000000l + " millis");
+        System.out.println(-0);
 
         try {
             System.out.println(ImageIO.write(img, "BMP", new File("d:\\test2.bmp")));
@@ -52,8 +57,6 @@ public class Main {
     
     static void xline(int x0, int y0, int x1, int y1, Graphics g, Color color) {
         boolean steep = false;
-        //origin bottom left for LLO
-        g.translate(0, height);
         g.setColor(color);
         if(Math.abs(x0-x1) < Math.abs(y0-y1)) {
             //swap
