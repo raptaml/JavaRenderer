@@ -31,7 +31,7 @@ public class Main {
         xline(0,0,width,height,g,Color.red);
        long end = System.nanoTime();
        
-        System.out.println("spent "+ (double)(end-start)/1000l + " millis");
+        System.out.println("spent "+ (double)(end-start)/1000000l + " millis");
 
         try {
             System.out.println(ImageIO.write(img, "BMP", new File("d:\\test2.bmp")));
