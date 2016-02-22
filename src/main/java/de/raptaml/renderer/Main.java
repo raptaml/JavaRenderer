@@ -30,9 +30,9 @@ public class Main {
         
        long start = System.nanoTime();
        //for(long i = 1l; i < 1000000l; i++)
-            xline(0,0,30,50,g,Color.red);
-            xline(30,50,60,20,g,Color.blue);
-            xline(60,20,0,0,g,Color.yellow);
+            xline(0,0,100,50,g,Color.red);
+            //xline(30,50,60,20,g,Color.blue);
+            //xline(60,20,0,0,g,Color.yellow);
        long end = System.nanoTime();
        
         System.out.println("spent "+ (double)(end-start)/1000000l + " millis");
@@ -47,12 +47,8 @@ public class Main {
     }
      
     static void line(int x0, int y0, int x1, int y1, Graphics g, Color color) {
-        g.translate(0, height);
-        for (int x=x0; x <=x1; x++) {
-             float t = (x-x0)/(float)(x1-x0);
-             int y = (int) (y0 * (1f-t) + y1 * t);
-             g.drawRect(x, -y, 0, 0);
-        }
+        g.setColor(color);
+        g.drawLine(x0, -y0, x1, -y1);
     }
     
     static void xline(int x0, int y0, int x1, int y1, Graphics g, Color color) {
@@ -88,8 +84,10 @@ public class Main {
             //allways draw negative y to translate to LLO coodrdinates
             if (steep) {
                 g.drawRect(y, -x, 0,0);
+                //g.drawLine(y,-x,y,-x);
             } else {
                 g.drawRect(x, -y, 0,0);
+                //g.drawLine(x, -y, x, -y);
             }
             error += derror;
             if (error>.5f) {
