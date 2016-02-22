@@ -17,44 +17,43 @@ import javax.imageio.ImageIO;
  * @author lemmer
  */
 public class Main {
+    static int width = 1920;
+    static int height = 1080;
+     
     public static void main(String[] args) {
-        
-        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+                
+        BufferedImage img = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_RGB);
         Graphics g = img.createGraphics();
         
         //draw line between 0/0 and 10/10
         
-        //xline(13, 20, 80, 40, g, Color.red);
-        //xline(20, 13, 40, 80, g, Color.green);
-        //xline(80, 41, 13, 21, g, Color.yellow);
-        xline(0,0,100,100,g,Color.blue);
+       long start = System.nanoTime();
+        xline(0,0,width,height,g,Color.red);
+       long end = System.nanoTime();
+       
+        System.out.println("spent "+ (double)(end-start)/1000l + " millis");
 
-        
-        
         try {
             System.out.println(ImageIO.write(img, "BMP", new File("d:\\test2.bmp")));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        
-        
-        
+
     }
      
     static void line(int x0, int y0, int x1, int y1, Graphics g, Color color) {
-        //g.translate(0, 100);
+        g.translate(0, height);
         for (int x=x0; x <=x1; x++) {
              float t = (x-x0)/(float)(x1-x0);
              int y = (int) (y0 * (1f-t) + y1 * t);
-             g.drawRect(x, y, 0, 0);
+             g.drawRect(x, -y, 0, 0);
         }
     }
     
     static void xline(int x0, int y0, int x1, int y1, Graphics g, Color color) {
         boolean steep = false;
         //origin bottom left for LLO
-        g.translate(0, 100);
+        g.translate(0, height);
         g.setColor(color);
         if(Math.abs(x0-x1) < Math.abs(y0-y1)) {
             //swap
