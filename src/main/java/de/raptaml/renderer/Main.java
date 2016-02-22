@@ -27,7 +27,7 @@ public class Main {
         //xline(13, 20, 80, 40, g, Color.red);
         //xline(20, 13, 40, 80, g, Color.green);
         //xline(80, 41, 13, 21, g, Color.yellow);
-        xline(0,0,0,100,g,Color.blue);
+        xline(0,0,100,100,g,Color.blue);
 
         
         
@@ -53,7 +53,8 @@ public class Main {
     
     static void xline(int x0, int y0, int x1, int y1, Graphics g, Color color) {
         boolean steep = false;
-        
+        //origin bottom left for LLO
+        g.translate(0, 100);
         g.setColor(color);
         if(Math.abs(x0-x1) < Math.abs(y0-y1)) {
             //swap
@@ -82,10 +83,11 @@ public class Main {
         float error = 0;
         int y = y0;
         for (int x=x0; x<=x1; x++) {
+            //allways draw negative y to translate to LLO coodrdinates
             if (steep) {
-                g.drawRect(y, x, 0,0);
+                g.drawRect(y, -x, 0,0);
             } else {
-                g.drawRect(x, y, 0,0);
+                g.drawRect(x, -y, 0,0);
             }
             error += derror;
             if (error>.5f) {
