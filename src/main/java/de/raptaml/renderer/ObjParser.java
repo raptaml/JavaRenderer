@@ -11,7 +11,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,12 +24,11 @@ public class ObjParser {
     
     FileReader objFile;
     BufferedReader reader;
-    Vector v;
     
 
     public ObjParser() {
         try {
-            objFile = new FileReader("african_head.obj");
+            objFile = new FileReader("african_head.txt");
             reader = new BufferedReader(objFile);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ObjParser.class.getName()).log(Level.SEVERE, null, ex);
@@ -38,14 +38,25 @@ public class ObjParser {
     
     void parseObj() {
         
+        Obj obj = new Obj();
+        ArrayList<String> vertStrings = new ArrayList<>();
+        ArrayList<String> faceStrings = new ArrayList<>();
         String line;
         try {
             System.out.println(objFile.getEncoding());
-            while ((line = reader.readLine()) != null) {
-                //System.out.println(line);
-                if (line.charAt(1) == 'v' && line.charAt(3) == ' ')
-                    System.out.println(line);
+            while ((line = reader.readLine()) != null)  {
+                //System.out.println(line.charAt(2));
+                if ((line.length() > 0) && line.charAt(0) == 'v' && line.charAt(1) == ' ') {
+                    String[] splittedLine = line.split(" ");
+                    for (int i = 1; i < splittedLine.length; i++)
+                        vertStrings.add(splittedLine[i]);
+                } else if ((line.length() > 0) && line.charAt(0) == 'f' && line.charAt(1) == ' ') {
+                    
+                }
+                
+                        
             }
+            System.out.println(vertStrings);
             
         } catch (IOException ex) {
             Logger.getLogger(ObjParser.class.getName()).log(Level.SEVERE, null, ex);
