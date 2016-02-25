@@ -29,8 +29,8 @@ public class Main {
         //draw line between 0/0 and 10/10
         
        long start = System.nanoTime();
-       //for(long i = 1l; i < 1000000l; i++)
-            xline(0,0,100,50,g,Color.red);
+       for(int i = 1; i < 3000000; i++)
+            line(0,0,100,50,g,Color.red);
             //xline(30,50,60,20,g,Color.blue);
             //xline(60,20,0,0,g,Color.yellow);
        long end = System.nanoTime();
@@ -39,10 +39,15 @@ public class Main {
         System.out.println(-0);
 
         try {
-            System.out.println(ImageIO.write(img, "BMP", new File("d:\\test2.bmp")));
+            System.out.println("BITMAP WRITTEN " + ImageIO.write(img, "BMP", new File("d:\\test2.bmp")));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        //parse obj
+        ObjParser obj = new ObjParser();
+        obj.parseObj();
+        
 
     }
      
