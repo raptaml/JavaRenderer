@@ -75,21 +75,19 @@ public class ObjParser {
                     n++;
                 }
             }
+            //System.out.println(obj.faces.length +" "+faceStrings.size());
             n= 0;
-            System.out.println(obj.faces.length +" "+faceStrings.size());
-            for (int[] face : obj.faces) {
-                for (String faceString :faceStrings.get(n).split(" ")) {
-                    for (int j = 0; j < 3; j++) {
-                        face[j] = Integer.valueOf(faceString.split("/")[j]);
-                    //face[j] = Integer.valueOf(faceStrings.get(n).split("/")[j*3].trim());  
-                    }
-                n++;
-                if (n==2493)
-                    System.out.println(n);
+            for (String faceRow : faceStrings) {
+                String[] splittedRow = faceRow.split(" ");
+                int count = 0;
+                for (String faceVert : splittedRow) {               
+                   obj.faces[n][count] = Integer.valueOf(faceVert.split("/")[0]);
+                   count++;
                 }
+                n++;
             }
             //DBG
-            for (int[] face : obj.faces) {
+           for (int[] face : obj.faces) {
                 System.out.println(Arrays.toString(face));
             }
             
