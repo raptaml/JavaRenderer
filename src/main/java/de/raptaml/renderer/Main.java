@@ -5,11 +5,13 @@
  */
 package de.raptaml.renderer;
 
+import de.raptaml.renderer.ObjParser.Obj;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 /**
@@ -44,9 +46,11 @@ public class Main {
             e.printStackTrace();
         }
         
-        //parse obj
-        ObjParser obj = new ObjParser();
-        obj.parseObj();
+        //parse objfile
+        ObjParser objParser = new ObjParser("african_head.txt");
+        Obj obj = objParser.parseObjFile();
+        
+        // Draw Obj
         
 
     }
